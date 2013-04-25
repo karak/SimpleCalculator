@@ -28,6 +28,9 @@ namespace SimpleCalculator
         {
             var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(Program).Assembly));
+            var exePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            var extensionsDir = System.IO.Path.Combine(exePath, @"..\..\..\..\ExtendedOperations\bin\Release");
+            catalog.Catalogs.Add(new DirectoryCatalog(extensionsDir));
 
             _container = new CompositionContainer(catalog);
 
@@ -110,56 +113,6 @@ namespace SimpleCalculator
                 }
             }
             return -1;
-        }
-    }
-
-    [Export(typeof(IOperation))]
-    [ExportMetadata("Symbol", '+')]
-    class Addition : IOperation
-    {
-        public int Operate(int left, int right)
-        {
-            return left + right;
-        }
-    }
-
-    [Export(typeof(IOperation))]
-    [ExportMetadata("Symbol", '-')]
-    class Subtraction : IOperation
-    {
-        public int Operate(int left, int right)
-        {
-            return left - right;
-        }
-    }
-
-    [Export(typeof(IOperation))]
-    [ExportMetadata("Symbol", '*')]
-    class Multiplication : IOperation
-    {
-        public int Operate(int left, int right)
-        {
-            return left * right;
-        }
-    }
-
-    [Export(typeof(IOperation))]
-    [ExportMetadata("Symbol", '/')]
-    class Division : IOperation
-    {
-        public int Operate(int left, int right)
-        {
-            return left / right;
-        }
-    }
-
-    [Export(typeof(IOperation))]
-    [ExportMetadata("Symbol", '%')]
-    class Modulo : IOperation
-    {
-        public int Operate(int left, int right)
-        {
-            return left % right;
         }
     }
 }
