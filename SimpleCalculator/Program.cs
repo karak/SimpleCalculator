@@ -122,4 +122,44 @@ namespace SimpleCalculator
             return left + right;
         }
     }
+
+    [Export(typeof(IOperation))]
+    [ExportMetadata("Symbol", '-')]
+    class Subtraction : IOperation
+    {
+        public int Operate(int left, int right)
+        {
+            return left - right;
+        }
+    }
+
+    [Export(typeof(IOperation))]
+    [ExportMetadata("Symbol", '*')]
+    class Multiplication : IOperation
+    {
+        public int Operate(int left, int right)
+        {
+            return left * right;
+        }
+    }
+
+    [Export(typeof(IOperation))]
+    [ExportMetadata("Symbol", '/')]
+    class Division : IOperation
+    {
+        public int Operate(int left, int right)
+        {
+            return left / right;
+        }
+    }
+
+    [Export(typeof(IOperation))]
+    [ExportMetadata("Symbol", '%')]
+    class Modulo : IOperation
+    {
+        public int Operate(int left, int right)
+        {
+            return left % right;
+        }
+    }
 }
